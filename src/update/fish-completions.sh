@@ -124,6 +124,10 @@ if command_exist codex && envvar_exist OPENAI_API_KEY; then
     pueue add -- "codex completion fish> '${COMPLETIONS_DIR}'/codex.fish"
 fi
 
+if command_exist srgn; then
+    pueue add -- "srgn --completions fish> '${COMPLETIONS_DIR}'/srgn.fish"
+fi
+
 # install via curl
 if command_exist eza; then
     pueue add -- "curl -L https://raw.githubusercontent.com/eza-community/eza/main/completions/fish/eza.fish -o '${COMPLETIONS_DIR}'/eza.fish"
