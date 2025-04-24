@@ -52,6 +52,12 @@ for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "p
     fi
 done
 
+for cmd in "ccsum" "task"; do
+    if command_exist "${cmd}"; then
+        pueue add -- "'${cmd}' --completion fish > '${COMPLETIONS_DIR}'/'${cmd}'.fish"
+    fi
+done
+
 if command_exist bun; then
     pueue add -- "bun completions"
 fi
@@ -114,10 +120,6 @@ fi
 
 if command_exist atuin; then
     pueue add -- "atuin gen-completions --shell fish> '${COMPLETIONS_DIR}'/atuin.fish"
-fi
-
-if command_exist ccsum; then
-    pueue add -- "ccsum --completion fish> '${COMPLETIONS_DIR}'/ccsum.fish"
 fi
 
 if command_exist codex && envvar_exist OPENAI_API_KEY; then
