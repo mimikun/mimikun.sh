@@ -1,4 +1,7 @@
 [default.extend-words]
+# Set-Alias -Name chec -Value Invoke-ChezmoiCd
+# powershell/Invoke-ChezmoiCd.ps1:12:17
+chec = "chec"
 
 [files]
 extend-exclude = [
