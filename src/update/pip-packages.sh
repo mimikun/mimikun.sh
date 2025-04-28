@@ -1,17 +1,17 @@
 #!/bin/bash
 
-pip_outdate_pkgs=$(pip freeze | sed -e 's/=.*//g')
-for i in $pip_outdate_pkgs; do
-  pip install --upgrade "$i"
-done
+pip_outdated_pkgs=$(pip freeze | sed -e 's/=.*//g')
+echo "Update these packages:"
+echo "$pip_outdated_pkgs"
 
-#--------------------------------------------------------
-# pueue version
-#--------------------------------------------------------
+if [ "$1" == "--no-pueue" ]; then
+    for i in $pip_outdated_pkgs; do
+        pip install --upgrade "$i"
+    done
+else
+    task_id=$(pueue add -p -- "echo start")
 
-#!/bin/bash
-
-pip_outdate_pkgs=$(pip freeze | sed -e 's/=.*//g')
-for i in $pip_outdate_pkgs; do
-  pueue add -- "pip install --upgrade $i"
-done
+    for i in $pip_outdated_pkgs; do
+        task_id=$(pueue add --after "$task_id" -p -- "pip install --upgrade $i")
+    done
+fi
