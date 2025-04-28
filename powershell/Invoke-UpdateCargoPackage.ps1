@@ -1,4 +1,4 @@
-﻿function Get-NeedUpdateCargoPackages()
+﻿function Get-NeedUpdateCargoPackage()
 {
     $tmp = cargo install-update --list |
         Select-Object -Skip 2
@@ -21,10 +21,10 @@
     return $need_update_pkgs
 }
 
-function Invoke-UpdateCargoPackages()
+function Invoke-UpdateCargoPackage()
 {
     Param([switch]$NoPueue)
-    Get-NeedUpdateCargoPackages | ForEach-Object {
+    Get-NeedUpdateCargoPackage | ForEach-Object {
         $pkgs = $_.Package
         Write-Output "Update: $pkgs"
         if ($NoPueue)
@@ -37,5 +37,5 @@ function Invoke-UpdateCargoPackages()
     }
 }
 
-Set-Alias -Name update_cargo_packages -Value Invoke-UpdateCargoPackages
-Set-Alias -Name upcapa -Value Invoke-UpdateCargoPackages
+Set-Alias -Name update_cargo_package -Value Invoke-UpdateCargoPackage
+Set-Alias -Name upcapa -Value Invoke-UpdateCargoPackage
