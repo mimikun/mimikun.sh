@@ -455,3 +455,90 @@ fi
 ```powershell
 Write-Output "Windows is not support now!"
 ```
+
+## install
+
+> Run install
+
+```bash
+before_sudo() {
+    if ! test "$(
+        sudo uname >>/dev/null
+        echo $?
+    )" -eq 0; then
+        exit 1
+    fi
+}
+
+# Chezmoi
+# install -m 755 ./src/chezmoi/post-apply-hook.sh "$HOME/.local/bin/chezmoi-post-apply-hook"
+# install -m 755 ./src/chezmoi/pre-apply-hook.sh "$HOME/.local/bin/chezmoi-pre-apply-hook"
+# NOTE: Deprecated
+install -m 755 ./src/chezmoi/post-apply-hook.sh "$HOME/.local/bin/chezmoi_post_apply_hook"
+install -m 755 ./src/chezmoi/pre-apply-hook.sh "$HOME/.local/bin/chezmoi_pre_apply_hook"
+
+# Generate
+# install -m 755 ./src/generate/cargo-package-list.sh "$HOME/.local/bin/generate-cargo-package-list"
+# install -m 755 ./src/generate/pip-package-list.sh "$HOME/.local/bin/generate-pip-package-list"
+# install -m 755 ./src/generate/pipx-package-list.sh "$HOME/.local/bin/generate-pipx-package-list"
+# install -m 755 ./src/generate/uv-tool-list.sh "$HOME/.local/bin/generate-uv-tool-list"
+# NOTE: Deprecated
+install -m 755 ./src/generate/cargo-package-list.sh "$HOME/.local/bin/generate_cargo_package_list"
+install -m 755 ./src/generate/pip-package-list.sh "$HOME/.local/bin/generate_pip_package_list"
+install -m 755 ./src/generate/pipx-package-list.sh "$HOME/.local/bin/generate_pipx_package_list"
+install -m 755 ./src/generate/uv-tool-list.sh "$HOME/.local/bin/generate_uv_tool_list"
+
+# Install
+# install -m 755 ./src/install/cargo-packages.sh "$HOME/.local/bin/install-cargo-packages"
+# install -m 755 ./src/install/gh-extensions.sh "$HOME/.local/bin/install-gh-extensions"
+# install -m 755 ./src/install/pip-packages.sh "$HOME/.local/bin/install-pip-packages"
+# install -m 755 ./src/install/pipx-packages.sh "$HOME/.local/bin/install-pipx-packages"
+# install -m 755 ./src/install/uv-tools.sh "$HOME/.local/bin/install-uv-tools"
+# NOTE: Deprecated
+install -m 755 ./src/install/cargo-packages.sh "$HOME/.local/bin/install_cargo_packages"
+install -m 755 ./src/install/gh-extensions.sh "$HOME/.local/bin/install_gh_extensions"
+install -m 755 ./src/install/pip-packages.sh "$HOME/.local/bin/install_pip_packages"
+install -m 755 ./src/install/pipx-packages.sh "$HOME/.local/bin/install_pipx_packages"
+install -m 755 ./src/install/uv-tools.sh "$HOME/.local/bin/install_uv_tools"
+
+# Misc
+install -m 755 ./src/misc/cpat.sh "$HOME/.local/bin/cpat"
+install -m 755 ./src/misc/editorconfig.sh "$HOME/.local/bin/editorconfig"
+install -m 755 ./src/misc/numeronym.sh "$HOME/.local/bin/numeronym"
+install -m 755 ./src/misc/pcd.sh "$HOME/.local/bin/pcd"
+# install -m 755 ./src/misc/read-confirm.sh "$HOME/.local/bin/read-confirm"
+# install -m 755 ./src/misc/re-boot.sh "$HOME/.local/bin/re-boot"
+# install -m 755 ./src/misc/shut-down.sh "$HOME/.local/bin/shut-down"
+# NOTE: Deprecated
+install -m 755 ./src/misc/read-confirm.sh "$HOME/.local/bin/read_confirm"
+install -m 755 ./src/misc/re-boot.sh "$HOME/.local/bin/re_boot"
+install -m 755 ./src/misc/shut-down.sh "$HOME/.local/bin/shut_down"
+
+# Update
+# install -m 755 ./src/update/cargo-packages.sh "$HOME/.local/bin/update-cargo-packages"
+# install -m 755 ./src/update/pip-packages.sh "$HOME/.local/bin/update-pip-packages"
+# install -m 755 ./src/update/brew.sh "$HOME/.local/bin/update-brew"
+# install -m 755 ./src/update/mise.sh "$HOME/.local/bin/update-mise"
+# install -m 755 ./src/update/chromedriver.sh "$HOME/.local/bin/update-chromedriver"
+# install -m 755 ./src/update/geckodriver.sh "$HOME/.local/bin/update-geckodriver"
+# install -m 755 ./src/update/docker-compose.sh "$HOME/.local/bin/update-docker-compose"
+# install -m 755 ./src/update/twitch-cli.sh "$HOME/.local/bin/update-twitch-cli"
+# install -m 755 ./src/update/fish-completions.sh "$HOME/.local/bin/update-fish-completions"
+# install -m 755 ./src/update/various.sh "$HOME/.local/bin/update-various"
+# NOTE: Deprecated
+install -m 755 ./src/update/cargo-packages.sh "$HOME/.local/bin/update_cargo_packages"
+install -m 755 ./src/update/pip-packages.sh "$HOME/.local/bin/update_pip_packages"
+install -m 755 ./src/update/brew.sh "$HOME/.local/bin/update_brew"
+install -m 755 ./src/update/mise.sh "$HOME/.local/bin/update_mise"
+install -m 755 ./src/update/chromedriver.sh "$HOME/.local/bin/update_chromedriver"
+install -m 755 ./src/update/geckodriver.sh "$HOME/.local/bin/update_geckodriver"
+install -m 755 ./src/update/twitch-cli.sh "$HOME/.local/bin/update_docker_compose"
+install -m 755 ./src/update/docker-compose.sh "$HOME/.local/bin/update_twitch_cli"
+install -m 755 ./src/update/fish-completions.sh "$HOME/.local/bin/update_fish_completions"
+install -m 755 ./src/update/various.sh "$HOME/.local/bin/vup"
+```
+
+
+```powershell
+Copy-Item -Path .\powershell\* -Destination "$env:USERPROFILE\Tools\"
+```

@@ -86,6 +86,11 @@ patch-branch :
 morning-routine :
 	mise tasks run git:morning-routine
 
+## Run install
+.PHONY : install
+install :
+	mise tasks run install
+
 ## Show help
 .PHONY : help
 help :
