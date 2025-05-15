@@ -9,9 +9,10 @@ if [ "$1" == "--no-pueue" ]; then
         cargo install "$i"
     done
 else
-    task_id=$(pueue add -p -- "echo start")
+    #task_id=$(pueue add -p -- "echo start")
 
     for i in $cargo_outdated_pkgs; do
-        task_id=$(pueue add --after "$task_id" -p -- "cargo install $i")
+        pueue add -- "cargo install $i"
+        #task_id=$(pueue add --after "$task_id" -p -- "cargo install $i")
     done
 fi
