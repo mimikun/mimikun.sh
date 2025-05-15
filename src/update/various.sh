@@ -171,6 +171,9 @@ use_pueue() {
 
     echo "sunbeam extension upgrade --all"
     pueue add -- "sunbeam extension upgrade --all"
+
+    echo "cleanup cargo caches"
+    pueue add -- "cargo cache -a"
 }
 
 no_pueue() {
@@ -238,6 +241,9 @@ no_pueue() {
 
     echo "sunbeam extension upgrade --all"
     sunbeam extension upgrade --all
+
+    echo "cleanup cargo caches"
+    cargo cache -a
 }
 
 other() {
