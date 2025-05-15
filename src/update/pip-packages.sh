@@ -9,9 +9,10 @@ if [ "$1" == "--no-pueue" ]; then
         pip install --upgrade "$i"
     done
 else
-    task_id=$(pueue add -p -- "echo start")
+    #task_id=$(pueue add -p -- "echo start")
 
     for i in $pip_outdated_pkgs; do
-        task_id=$(pueue add --after "$task_id" -p -- "pip install --upgrade $i")
+        pueue add -- "pip install --upgrade $i"
+        #task_id=$(pueue add --after "$task_id" -p -- "pip install --upgrade $i")
     done
 fi
