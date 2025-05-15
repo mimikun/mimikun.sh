@@ -104,8 +104,15 @@ use_pueue() {
     echo "bun upgrade"
     pueue add -- "bun upgrade"
 
-    echo "mise upgrade"
-    mise_task_id=$(pueue add -p -- "mise upgrade")
+    # If has human rights
+    # NOTE: If human rights violated, mise upgrade will be postponed.
+    if [ "$HOST_NAME" != $W_NAME ]; then
+        echo "mise upgrade (has human rights)"
+        mise_task_id=$(pueue add -p -- "mise upgrade")
+        pvim_task_id=$(pueue add -p --after "$mise_task_id" -- "update_mise paleovim-master --use-pueue")
+        pueue add --after "$pvim_task_id" -- "update_mise paleovim-latest --use-pueue"
+        pueue add --after "$mise_task_id" -- "update_mise zig-master --use-pueue"
+    fi
 
     echo "tldr --update"
     pueue add -- "tldr --update"
@@ -118,11 +125,6 @@ use_pueue() {
 
     echo "update_pnpm"
     pueue add -- "update_pnpm"
-
-    echo "update mise tools"
-    pvim_task_id=$(pueue add -p --after "$mise_task_id" -- "update_mise paleovim-master --use-pueue")
-    pueue add --after "$pvim_task_id" -- "update_mise paleovim-latest --use-pueue"
-    pueue add --after "$mise_task_id" -- "update_mise zig-master --use-pueue"
 
     echo "update neovim managed by bob"
     bob_task_id=$(pueue add -p -- "bob use latest")
@@ -174,6 +176,15 @@ use_pueue() {
 
     echo "cleanup cargo caches"
     pueue add -- "cargo cache -a"
+
+    # NOTE: If human rights violated
+    if [ "$HOST_NAME" == $W_NAME ]; then
+        echo "mise upgrade (human rights violated)"
+        pueue add -- "mise upgrade"
+        pueue add -- "update_mise paleovim-master --use-pueue"
+        pueue add -- "update_mise paleovim-latest --use-pueue"
+        pueue add -- "update_mise zig-master --use-pueue"
+    fi
 }
 
 no_pueue() {
