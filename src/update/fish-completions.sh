@@ -130,6 +130,10 @@ if command_exist srgn; then
     pueue add -- "srgn --completions fish> '${COMPLETIONS_DIR}'/srgn.fish"
 fi
 
+if command_exist pixi; then
+    pueue add -- "pixi completion --shell fish> '${COMPLETIONS_DIR}'/pixi.fish"
+fi
+
 # install via curl
 if command_exist eza; then
     pueue add -- "curl -L https://raw.githubusercontent.com/eza-community/eza/main/completions/fish/eza.fish -o '${COMPLETIONS_DIR}'/eza.fish"
