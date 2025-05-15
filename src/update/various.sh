@@ -166,7 +166,8 @@ use_pueue() {
     aqua_task_id=$(pueue add -p -- "aqua update-aqua")
     aqua_task_id=$(pueue add --after "$aqua_task_id" -p -- "aqua install --all")
     aqua_task_id=$(pueue add --after "$aqua_task_id" -p -- "aqua update")
-    pueue add --after "$aqua_task_id" -- "aqua install --all"
+    aqua_task_id=$(pueue add --after "$aqua_task_id" -p -- "aqua install --all")
+    pueue add --after "$aqua_task_id" -- "aqua vacuum"
 
     echo "sunbeam extension upgrade --all"
     pueue add -- "sunbeam extension upgrade --all"
@@ -233,6 +234,7 @@ no_pueue() {
     aqua install --all
     aqua update
     aqua install --all
+    aqua vacuum
 
     echo "sunbeam extension upgrade --all"
     sunbeam extension upgrade --all
