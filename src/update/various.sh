@@ -177,6 +177,9 @@ use_pueue() {
     echo "cleanup cargo caches"
     pueue add -- "cargo cache -a"
 
+    echo "upgrade pixi"
+    pueue add -- "pixi self-upgrade"
+
     # NOTE: If human rights violated
     if [ "$HOST_NAME" == $W_NAME ]; then
         echo "mise upgrade (human rights violated)"
@@ -255,6 +258,9 @@ no_pueue() {
 
     echo "cleanup cargo caches"
     cargo cache -a
+
+    echo "upgrade pixi"
+    pixi self-upgrade
 }
 
 other() {
