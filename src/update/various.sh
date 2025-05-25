@@ -103,7 +103,8 @@ arch() {
 
 # Mac
 mac() {
-    brew_update
+    echo "I haven't mac now!"
+    #brew_update
 }
 
 # OSごとで処理を分岐
