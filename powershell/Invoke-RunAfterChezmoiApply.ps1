@@ -1,67 +1,74 @@
 ﻿# Run after chezmoi apply
-function Invoke-RunAfterChezmoiApply() {
+function Invoke-RunAfterChezmoiApply
+{
     Write-Output "post-apply-hook"
 
     ############################
     # Copy PowerShell profiles #
     ############################
+    # PowerShell profiles
+    $Profiles = @{
+        Base = Join-Path $env:USERPROFILE ".config\powershell\Microsoft.PowerShell_profile.ps1"
+        Pwsh = @{
+            Documents = Join-Path $env:USERPROFILE "Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+            OneDrive = Join-Path $env:USERPROFILE "OneDrive\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+        }
+        PowerShell = @{
+            Documents = Join-Path $env:USERPROFILE "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+            OneDrive = Join-Path $env:USERPROFILE "OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+        }
+    }
 
     Write-Output "Copy PowerShell profiles"
-    $base_profile = Join-Path $env:USERPROFILE -ChildPath ".config\powershell\Microsoft.PowerShell_profile.ps1"
-    $home_pwsh_profile = Join-Path $env:USERPROFILE -ChildPath "OneDrive\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-    $home_powershell_profile = Join-Path $env:USERPROFILE -ChildPath "OneDrive\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-    $work_pwsh_profile = Join-Path $env:USERPROFILE -ChildPath "Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-    $work_powershell_profile = Join-Path $env:USERPROFILE -ChildPath "Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
-
-    if ($env:COMPUTERNAME -eq "TANAKAPC") {
-        Copy-Item -Path $base_profile -Destination $work_pwsh_profile
-        Copy-Item -Path $base_profile -Destination $work_powershell_profile
-    } else {
-        Copy-Item -Path $base_profile -Destination $home_pwsh_profile
-        Copy-Item -Path $base_profile -Destination $home_powershell_profile
-    }
+    Copy-Item -Path $Profiles.Base -Destination $Profiles.Pwsh.Documents
+    Copy-Item -Path $Profiles.Base -Destination $Profiles.PowerShell.Documents
 
     ####################################
     # Copy nvim (neovim) configuration #
     ####################################
-
-    $windows_nvim_config = Join-Path -Path $env:LOCALAPPDATA -ChildPath "nvim\"
-    $linux_nvim_config = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_config\nvim\*"
-
-    Write-Output "Remove old nvim(neovim) configuration"
-    Remove-Item $windows_nvim_config -Force -Recurse
-
-    # folder exist check
-    if (-not (Test-Path -Path $windows_nvim_config)) {
-        # mkdir $windows_nvim_config
-        New-Item -Path $windows_nvim_config -ItemType "directory" > $null
+    # Neovim configuration
+    $NvimConfigs = @{
+        Windows = Join-Path -Path $env:LOCALAPPDATA -ChildPath "nvim"
+        Linux = @{
+            Full = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_config\nvim"
+            Mini = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_config\nvim-mini"
+        }
     }
 
+    Write-Output "Remove old nvim(neovim) configuration"
+    Remove-Item -Path $NvimConfigs.Windows -Force -Recurse -ErrorAction SilentlyContinue
+
+    Write-Output "Create nvim target directory"
+    New-Item -Path $NvimConfigs.Windows -ItemType Directory -Force | Out-Null
+
     Write-Output "Copy nvim (neovim) configuration"
-    Copy-Item -Path $linux_nvim_config -Destination $windows_nvim_config -Recurse -Force
+    Copy-Item -Path "$($NvimConfigs.Linux.Mini)\*" -Destination $NvimConfigs.Windows -Recurse -Force
 
     #####################################
     # Copy vim (paleovim) configuration #
     #####################################
-
-    $windows_pvim_config = Join-Path -Path $env:USERPROFILE -ChildPath "vimfiles\"
-    $home_pvim_config = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_config\vim\*"
-    $work_pvim_config = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_vim\*"
-
-    Write-Output "Remove old vim(paleovim) configuration"
-    Remove-Item $windows_pvim_config -Force -Recurse
-
-    # folder exist check
-    if (-not (Test-Path -Path $windows_pvim_config)) {
-        # mkdir $windows_pvim_config
-        New-Item -Path $windows_pvim_config -ItemType "directory" > $null
+    # Vim configuration
+    $PvimConfigs = @{
+        Home = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_config\vim"
+        Work = Join-Path -Path $env:CHEZMOI_DIR -ChildPath "dot_vim"
+        Windows = Join-Path -Path $env:USERPROFILE -ChildPath "vimfiles"
     }
 
+    $HomeComputers = @("wakamo", "izuna")
+
+    Write-Output "Remove old vim(paleovim) configuration"
+    Remove-Item -Path $PvimConfigs.Windows -Force -Recurse -ErrorAction SilentlyContinue
+
+    Write-Output "Create vim target directory"
+    New-Item -Path $PvimConfigs.Windows -ItemType Directory -Force | Out-Null
+
     Write-Output "Copy vim (paleovim) configuration"
-    if ($env:COMPUTERNAME -eq "TANAKAPC") {
-        Copy-Item -Path $work_pvim_config -Destination $windows_pvim_config -Recurse -Force
-    } else {
-        Copy-Item -Path $home_pvim_config -Destination $windows_pvim_config -Recurse -Force
+    if ($HomeComputers -contains $env:COMPUTERNAME.ToLower())
+    {
+        Copy-Item -Path "$($PvimConfigs.Home)\*" -Destination $PvimConfigs.Windows -Recurse -Force
+    } else
+    {
+        Copy-Item -Path "$($PvimConfigs.Work)\*" -Destination $PvimConfigs.Windows -Recurse -Force
     }
 }
 

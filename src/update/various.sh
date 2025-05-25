@@ -11,8 +11,6 @@ OS_INFO=$(os_info -t)
 readonly UBUNTU_OS="OS type: Ubuntu"
 readonly ARCH_OS="OS type: Arch Linux"
 readonly MAC_OS="OS type: Mac OS"
-readonly W_NAME="TanakaPC"
-HOST_NAME=$(cat /etc/hostname)
 
 USE_PUEUE=true
 SKIP_OS_PKG_UPDATE=false
@@ -106,13 +104,11 @@ use_pueue() {
 
     # If has human rights
     # NOTE: If human rights violated, mise upgrade will be postponed.
-    if [ "$HOST_NAME" != $W_NAME ]; then
-        echo "mise upgrade (has human rights)"
-        mise_task_id=$(pueue add -p -- "mise upgrade")
-        pvim_task_id=$(pueue add -p --after "$mise_task_id" -- "update_mise paleovim-master --use-pueue")
-        pueue add --after "$pvim_task_id" -- "update_mise paleovim-latest --use-pueue"
-        pueue add --after "$mise_task_id" -- "update_mise zig-master --use-pueue"
-    fi
+    echo "mise upgrade (has human rights)"
+    mise_task_id=$(pueue add -p -- "mise upgrade")
+    pvim_task_id=$(pueue add -p --after "$mise_task_id" -- "update_mise paleovim-master --use-pueue")
+    pueue add --after "$pvim_task_id" -- "update_mise paleovim-latest --use-pueue"
+    pueue add --after "$mise_task_id" -- "update_mise zig-master --use-pueue"
 
     echo "tldr --update"
     pueue add -- "tldr --update"
@@ -179,15 +175,6 @@ use_pueue() {
 
     echo "upgrade pixi"
     pueue add -- "pixi self-upgrade"
-
-    # NOTE: If human rights violated
-    if [ "$HOST_NAME" == $W_NAME ]; then
-        echo "mise upgrade (human rights violated)"
-        pueue add -- "mise upgrade"
-        pueue add -- "update_mise paleovim-master --use-pueue"
-        pueue add -- "update_mise paleovim-latest --use-pueue"
-        pueue add -- "update_mise zig-master --use-pueue"
-    fi
 }
 
 no_pueue() {
@@ -328,7 +315,7 @@ main() {
     # 残りの共通処理
     other
 
-    if [ "$HOST_NAME" == $W_NAME ]; then
+    if command -v deps_update >/dev/null 2>&1; then
         echo "This is Work-PC!!!"
         echo "Run Work-PC only update tasks"
         deps_update
