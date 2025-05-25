@@ -11,6 +11,7 @@ OS_INFO=$(os_info -t)
 readonly UBUNTU_OS="OS type: Ubuntu"
 readonly ARCH_OS="OS type: Arch Linux"
 readonly MAC_OS="OS type: Mac OS"
+readonly USE_AUR_CMD="paru"
 
 USE_PUEUE=true
 SKIP_OS_PKG_UPDATE=false
@@ -62,9 +63,42 @@ ubuntu() {
     sudo apt-get clean
 }
 
+readonly USE_AUR_CMD="paru"
+
+arch_paru() {
+    # Upgrade packages
+    paru -Syu
+    # Cleaning packages
+    paru -Rns $(paru -Qtdq) 2>/dev/null || true
+    paru -Sc
+    paru -Scc
+}
+
+arch_yay() {
+    # Upgrade packages
+    yay -Syu
+    # Cleaning packages
+    yay -Rns $(yay -Qtdq) 2>/dev/null || true
+    yay -Sc
+    yay -Scc
+}
+
+arch_pacman() {
+    # Upgrade packages
+    sudo pacman -Syu
+    # Cleaning packages
+    sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null || true
+    sudo pacman -Sc
+    sudo pacman -Scc
+}
+
 # Arch Linux
 arch() {
-    paru -Syu
+    case "$USE_AUR_CMD" in
+    "paru") arch_paru ;;
+    "yay") arch_yay ;;
+    *) arch_pacman ;;
+    esac
 }
 
 # Mac
