@@ -6,6 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a collection of personal shell scripts (mimikun.sh) with dual implementations in Bash and PowerShell. The project is planned to be rewritten in deno-dax. Scripts are organized by function (chezmoi hooks, package management, system utilities).
 
+## LLM Context Documents
+
+Extended context and documentation for LLMs (AI assistants) are stored in `docs/llms/`:
+- `docs/llms/rewrite-context.md` - Context and requirements for code rewrites
+- `docs/llms/rewrite-progress.md` - Progress tracking for ongoing rewrites
+
 ## Common Commands
 
 ### Linting and Testing
