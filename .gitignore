@@ -4,3 +4,4 @@
 *.patch.gpg
 node_modules
 .textlintcache
+.claude/settings.local.json
