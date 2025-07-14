@@ -51,17 +51,6 @@ before_sudo() {
     fi
 }
 
-# Ubuntu
-ubuntu() {
-    # Upgrade APT repogitory list
-    sudo apt update
-    # Upgrade APT packages
-    sudo apt upgrade -y
-    # Cleaning APT caches
-    sudo apt autoremove -y
-    sudo apt-get clean
-}
-
 # Mac
 mac() {
     echo "I haven't mac now!"
@@ -75,7 +64,7 @@ os_pkg_update() {
         return 0
     fi
     case "$OS_INFO" in
-    "$UBUNTU_OS") ubuntu ;;
+    "$UBUNTU_OS") update-apt-package;;
     "$MAC_OS") mac ;;
     "$ARCH_OS") update-arch-package ;;
     *) echo "This distro NOT support." ;;
