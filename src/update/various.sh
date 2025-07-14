@@ -159,7 +159,8 @@ use_pueue() {
     bob_task_id=$(pueue add -p --after "$bob_task_id" -- "bob update latest")
     pueue add --after "$bob_task_id" -- "bob install head"
 
-    echo "fisher update"
+    echo "update fish plugins"
+    pez upgrade
     fish -c 'fisher update'
 
     echo "update_cargo_packages"
@@ -244,7 +245,8 @@ no_pueue() {
     bob update latest
     bob install head
 
-    echo "fisher update"
+    echo "update fish plugins"
+    pez upgrade
     fish -c 'fisher update'
 
     echo "update_cargo_packages"
