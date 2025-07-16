@@ -98,11 +98,11 @@ function _zig_master() {
         echo "zig (latest)master found!"
         echo "$new_zig_version" >"$zig_version_file"
         if [ "$opt" == "--use-pueue" ]; then
-            task_id=$(pueue add -p -- "mise uninstall zig@ref:master")
-            pueue add --after "$task_id" -- "mise install zig@ref:master"
+            task_id=$(pueue add -p -- "mise uninstall zig@master")
+            pueue add --after "$task_id" -- "mise install zig@master"
         else
-            mise uninstall zig@ref:master
-            mise install zig@ref:master
+            mise uninstall zig@master
+            mise install zig@master
         fi
     else
         echo "zig (latest)master is already installed"
