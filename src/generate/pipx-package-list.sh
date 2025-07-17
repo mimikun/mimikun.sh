@@ -2,5 +2,5 @@
 
 pipx list --short |
     cut -d " " -f 1 |
-    sort > \
+    LC_ALL=C sort > \
         "$HOME/.mimikun-pkglists/linux_pipx_packages.txt"
