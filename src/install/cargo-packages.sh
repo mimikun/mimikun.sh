@@ -39,3 +39,11 @@ while read -r line; do
         esac
     fi
 done <"$HOME/.mimikun-pkglists/linux_cargo_packages.txt"
+
+# Install from sources
+if [ "$1" == "--no-pueue" ]; then
+    cargo install --git https://github.com/Adarsh-Roy/gthr --locked
+else
+    pueue add -- "cargo install --git https://github.com/Adarsh-Roy/gthr --locked"
+    #task_id=$(pueue add --after "$task_id" -p -- "cargo install $line")
+fi

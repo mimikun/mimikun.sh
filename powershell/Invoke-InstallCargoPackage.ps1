@@ -59,6 +59,15 @@ function Invoke-InstallCargoPackage
                 }
             }
         }
+    # Install from sources
+    if ($NoPueue)
+    {
+        cargo install --git "https://github.com/Adarsh-Roy/gthr" --locked
+    } else
+    {
+        pueue add -- "cargo install --git 'https://github.com/Adarsh-Roy/gthr' --locked"
+        #$taskId = pueue add --after $taskId -p -- "cargo install $pkg"
+    }
 }
 
 Set-Alias -Name install_cargo_package -Value Invoke-InstallCargoPackage
