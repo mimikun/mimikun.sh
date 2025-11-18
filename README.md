@@ -49,7 +49,8 @@
 │   │   ├── cargo-package-list.sh
 │   │   ├── pip-package-list.sh
 │   │   ├── pipx-package-list.sh
-│   │   └── uv-tool-list.sh
+│   │   ├── uv-tool-list.sh
+│   │   └── uv-tool-list.ts
 │   ├── install
 │   │   ├── cargo-packages.sh
 │   │   ├── gh-extensions.sh
@@ -75,6 +76,7 @@
 │       ├── pip-packages.sh
 │       ├── twitch-cli.sh
 │       └── various.sh
+├── deno.json
 ├── lefthook.yml
 ├── LICENSE.txt
 ├── Makefile
