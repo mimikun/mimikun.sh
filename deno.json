@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@david/dax": "jsr:@david/dax@^0.42.0"
+  },
+  "tasks": {
+    "generate:pip": "deno run --allow-run --allow-read --allow-write --allow-env src/generate/pip-package-list.ts"
+  }
+}
