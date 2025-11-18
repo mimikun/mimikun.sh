@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "generate:pnpm": "deno run --allow-run --allow-write --allow-read --allow-env src/generate/pnpm-package-list.ts"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve"
+  }
+}
