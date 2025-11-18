@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@david/dax": "jsr:@david/dax@^0.42.0"
+  },
+  "tasks": {
+    "generate:archlinux": "deno run --allow-read --allow-write --allow-run --allow-env src/generate/archlinux-package-list.ts"
+  }
+}
