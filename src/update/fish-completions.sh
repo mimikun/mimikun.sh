@@ -52,7 +52,7 @@ for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "p
     fi
 done
 
-for cmd in "ccsum" "task"; do
+for cmd in "ccsum" "task" "ov"; do
     if command_exist "${cmd}"; then
         pueue add -- "'${cmd}' --completion fish > '${COMPLETIONS_DIR}'/'${cmd}'.fish"
     fi
