@@ -46,7 +46,7 @@ for cmd in "poetry" "rustup" "starship" "deno" "mdbook" "ast-grep" "rip" "pez"; 
     fi
 done
 
-for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "pnpm" "aqua" "berg" "sunbeam" "gitleaks" "lefthook" "nvs" "sake" "mani"; do
+for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "pnpm" "aqua" "berg" "sunbeam" "gitleaks" "lefthook" "nvs" "sake" "mani" "turm"; do
     if command_exist "${cmd}"; then
         pueue add -- "'${cmd}' completion fish > '${COMPLETIONS_DIR}'/'${cmd}'.fish"
     fi
