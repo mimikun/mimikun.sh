@@ -46,7 +46,7 @@ for cmd in "poetry" "rustup" "starship" "deno" "mdbook" "ast-grep" "rip" "pez"; 
     fi
 done
 
-for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "pnpm" "aqua" "berg" "sunbeam" "gitleaks" "lefthook" "nvs" "sake" "mani" "turm"; do
+for cmd in "chezmoi" "flyctl" "runme" "bin" "mise" "luarocks" "gopass" "glow" "pnpm" "aqua" "berg" "sunbeam" "gitleaks" "lefthook" "nvs" "sake" "mani" "turm" "pass-cli"; do
     if command_exist "${cmd}"; then
         pueue add -- "'${cmd}' completion fish > '${COMPLETIONS_DIR}'/'${cmd}'.fish"
     fi
@@ -136,6 +136,10 @@ fi
 
 if command_exist ty; then
     pueue add -- "ty generate-shell-completion fish > '${COMPLETIONS_DIR}'/ty.fish"
+fi
+
+if command_exist lazyworktree ; then
+    pueue add -- "lazyworktree completion fish --code > '${COMPLETIONS_DIR}'/lazyworktree.fish"
 fi
 
 # install via curl
