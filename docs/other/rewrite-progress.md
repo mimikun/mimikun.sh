@@ -9,11 +9,12 @@
 
 | ディレクトリ | ファイル名 | 状態 | 完了日 | 備考 |
 |------------|-----------|------|--------|------|
-| generate/ | archlinux-package-list.sh | 未着手 | - | |
-| generate/ | cargo-package-list.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/generate/cargo-package-list.ts`。削除済み |
-| generate/ | pip-package-list.sh | 未着手 | - | |
-| generate/ | pipx-package-list.sh | 未着手 | - | |
-| generate/ | uv-tool-list.sh | 未着手 | - | |
+| generate/ | archlinux-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`arch-official / arch-aur`）。削除済み |
+| generate/ | cargo-package-list.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`cargo`）。削除済み |
+| generate/ | pip-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`pip`）。削除済み |
+| generate/ | pipx-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`pipx`）。削除済み |
+| generate/ | pnpm-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`pnpm`）。削除済み |
+| generate/ | uv-tool-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`uv`）。削除済み |
 | install/ | arch-packages.sh | 未着手 | - | |
 | install/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/install/cargo-packages.ts`。削除済み |
 | install/ | gh-extensions.sh | 未着手 | - | |
