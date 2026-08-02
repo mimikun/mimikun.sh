@@ -31,7 +31,7 @@
 | update/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/update/cargo-packages.ts`。削除済み |
 | update/ | chromedriver.sh | 未着手 | - | |
 | update/ | docker-compose.sh | 未着手 | - | |
-| update/ | fish-completions.sh | 未着手 | - | |
+| update/ | fish-completions.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/update/fish-completions.ts`。削除済み。`~/scripts` 版を正とし、ここのコピーは破棄 |
 | update/ | geckodriver.sh | 未着手 | - | |
 | update/ | mise.sh | 未着手 | - | |
 | update/ | pip-packages.sh | 未着手 | - | |
