@@ -2,17 +2,20 @@
 
 このドキュメントは、`src`ディレクトリ以下のプログラムの書き直し進捗を記録します。
 
+**移管先は `mimikun/mimikun.scripts` の `src/**`（bun + TypeScript）。**
+移管が済んだファイルはこのリポジトリから削除する。対応する `powershell/*.ps1` も同時に消す。
+
 ## 進捗状況
 
 | ディレクトリ | ファイル名 | 状態 | 完了日 | 備考 |
 |------------|-----------|------|--------|------|
 | generate/ | archlinux-package-list.sh | 未着手 | - | |
-| generate/ | cargo-package-list.sh | 未着手 | - | |
+| generate/ | cargo-package-list.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/generate/cargo-package-list.ts`。削除済み |
 | generate/ | pip-package-list.sh | 未着手 | - | |
 | generate/ | pipx-package-list.sh | 未着手 | - | |
 | generate/ | uv-tool-list.sh | 未着手 | - | |
 | install/ | arch-packages.sh | 未着手 | - | |
-| install/ | cargo-packages.sh | 未着手 | - | |
+| install/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/install/cargo-packages.ts`。削除済み |
 | install/ | gh-extensions.sh | 未着手 | - | |
 | install/ | pip-packages.sh | 未着手 | - | |
 | install/ | pipx-packages.sh | 未着手 | - | |
@@ -25,7 +28,7 @@
 | misc/ | read-confirm.sh | 未着手 | - | |
 | misc/ | shut-down.sh | 未着手 | - | |
 | update/ | brew.sh | 未着手 | - | |
-| update/ | cargo-packages.sh | 未着手 | - | |
+| update/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/update/cargo-packages.ts`。削除済み |
 | update/ | chromedriver.sh | 未着手 | - | |
 | update/ | docker-compose.sh | 未着手 | - | |
 | update/ | fish-completions.sh | 未着手 | - | |
