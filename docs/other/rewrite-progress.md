@@ -15,12 +15,13 @@
 | generate/ | pipx-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`pipx`）。削除済み |
 | generate/ | pnpm-package-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`pnpm`）。削除済み |
 | generate/ | uv-tool-list.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/generate/package-lists.ts`（`uv`）。削除済み |
-| install/ | arch-packages.sh | 未着手 | - | |
-| install/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/install/cargo-packages.ts`。削除済み |
-| install/ | gh-extensions.sh | 未着手 | - | |
-| install/ | pip-packages.sh | 未着手 | - | |
-| install/ | pipx-packages.sh | 未着手 | - | |
-| install/ | uv-tools.sh | 未着手 | - | |
+| install/ | arch-packages.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`arch-official / arch-aur`）。削除済み |
+| install/ | cargo-packages.sh | 完了 | 2026-08-02 | → `mimikun.scripts` の `src/install/packages.ts`（`cargo`）。削除済み |
+| install/ | gh-extensions.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`gh-extension`）。削除済み |
+| install/ | pip-packages.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`pip`）。削除済み |
+| install/ | pipx-packages.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`pipx`）。削除済み |
+| install/ | pnpm-package.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`pnpm`）。削除済み |
+| install/ | uv-tools.sh | 完了 | 2026-08-03 | → `mimikun.scripts` の `src/install/packages.ts`（`uv`）。削除済み |
 | misc/ | cpat.sh | 未着手 | - | |
 | misc/ | editorconfig.sh | 未着手 | - | |
 | misc/ | numeronym.sh | 未着手 | - | |
