@@ -1,0 +1,28 @@
+docs/other/rewrite-progress.md
+  s_7d5d109a7dd36b::t_436a81c8c221d9 13
+  s_7d5d109a7dd36b::t_1e8f6a2f8b0bab 18
+  s_7d5d109a7dd36b::t_f5ea8eb56deb8e 31
+  s_7d5d109a7dd36b::t_42642667857e16 5-7
+README.md
+  s_7d5d109a7dd36b::t_ef7f460797085f 3-6,9-26
+  s_7d5d109a7dd36b::t_0ace73db630d48 32-42,57,65,68,71,75,86-87,95
+docs/other/rewrite-context.md
+  s_7d5d109a7dd36b::t_95a5efbe04ca9b 76
+  s_7d5d109a7dd36b::t_66ea3637c8ce02 11-12,16-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "c99685dee9e74ca03b27d30cf94433661519f540",
+  "prompts": {},
+  "sessions": {
+    "s_7d5d109a7dd36b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "62e664b1-0cf2-4c0c-9a0e-6715a5fe9868",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Yuto Tanaka <git@mimikun.dev>"
+    }
+  }
+}
