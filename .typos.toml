@@ -1,7 +1,6 @@
+# The only exception here was "chec", for the Invoke-ChezmoiCd alias in
+# powershell/, which is gone.
 [default.extend-words]
-# Set-Alias -Name chec -Value Invoke-ChezmoiCd
-# powershell/Invoke-ChezmoiCd.ps1:12:17
-chec = "chec"
 
 [files]
 extend-exclude = [

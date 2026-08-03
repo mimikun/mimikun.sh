@@ -1,7 +1,0 @@
-#!/bin/bash
-#MISE description="Lint by PowerShell ScriptAnalyzer"
-#MISE hide=true
-
-pwsh scripts/pssa.ps1
-
-# vim:ft=bash

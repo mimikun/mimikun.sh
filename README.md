@@ -1,107 +1,55 @@
 # mimikun.sh
 
-> **このリポジトリは `mimikun/mimikun.scripts` へ移管中。ここに新しい実装を書かないこと。**
-> 統合先は `mimikun.scripts` の `src/**`（bun + TypeScript）。
-> ランタイムは当初の deno-dax から bun に変更した（実行速度のため）。
+> **このリポジトリは役目を終えた。実装は `mimikun/mimikun.scripts`（bun + TypeScript）にある。**
+> ここに新しいものを書かないこと。読むなら `mimikun.scripts` の `AGENTS.md` から。
 
-## Roadmap
+`src/**` と `powershell/**` は 2026-08-03 に削除した。統合は完了している。
 
-`mimikun.scripts` へ1つずつ移し、移し終えたらこのリポジトリをアーカイブする。
+## どこへ行ったか
 
-- [x] cargo 系 → `mimikun.scripts` の `src/{generate,install,update}/cargo-*.ts`
-    - [x] generate_cargo_package_list ← `src/generate/cargo-package-list.sh` + `powershell/Invoke-GenerateCargoPackageList.ps1`
-    - [x] install_cargo_packages ← `src/install/cargo-packages.sh` + `powershell/Invoke-InstallCargoPackage.ps1`
-    - [x] update_cargo_packages ← `src/update/cargo-packages.sh` + `powershell/Invoke-UpdateCargoPackage.ps1`
-- [ ] `editorconfig`
-    - [ ] `src/misc/editorconfig.sh`
-    - [ ] `powershell/Invoke-GenerateEditorConfig.ps1`
+Linux で実際に動くのは chezmoi が配備する `~/.local/bin/*`、Windows で動くのは chezmoi の
+`dot_config/powershell/Microsoft.PowerShell_profile.ps1.tmpl` 内の関数定義。
+どちらも実装を持たず、`mimikun.scripts` を呼ぶ薄いシムになっている。
 
-### 移管するときの注意
+| ここにあったもの | 行き先 |
+|---|---|
+| cargo の生成 / 導入 / 更新 | `mimikun.scripts` の `src/{generate,install,update}/` |
+| fish 補完 | `src/update/fish-completions.ts` |
+| docker compose プラグイン | `src/update/docker-compose.ts` |
+| mise の `ref:` ピン（`mise.sh`） | `src/update/mise-refs.ts` |
+| `various.sh`（vup 本体） | `src/update/all.ts` |
+| `editorconfig` | `src/misc/editorconfig.ts` |
+| apt / arch / brew のパッケージ更新 | `src/update/all.ts` の `OS_PACKAGES` |
+| `misc/*`（cpat, numeronym, pcd, re-boot, read-confirm, shut-down） | chezmoi の `private_dot_local/bin/executable_*` |
+| chezmoi の apply hook | chezmoi の `executable_chezmoi_{pre,post}_apply_hook` |
 
-- **`src/**` と `powershell/**` は、どこからも読み込まれていない死んだコピー。**
-  Linux で実際に動くのは chezmoi が配備する `~/.local/bin/*`、Windows で動くのは chezmoi の
-  `dot_config/powershell/Microsoft.PowerShell_profile.ps1.tmpl` 内の関数定義。
-  移管を「完了」にするには、その2箇所も新実装を呼ぶよう書き換える必要がある。
-- ここのコピーは chezmoi 側と既に乖離している（2026-02 以降このリポジトリは動いていない）。
-  移管時は**このリポジトリではなく chezmoi 側を正**として読むこと。
+**パッケージマネージャに移したもの**（コードとしては消えた）:
 
-## Directory Structure
+| | |
+|---|---|
+| chromedriver | mise の `http:` backend（Chrome for Testing の `LATEST_RELEASE_STABLE`） |
+| geckodriver | mise の `github:` backend |
+| twitch-cli | aqua 標準レジストリ |
+| `pnpm-packages.sh` | `pnpm self-update` |
 
-```text
-.
-├── docs
-│   ├── design
-│   │   └── README.md
-│   ├── idea
-│   │   └── README.md
-│   ├── other
-│   │   ├── rewrite-context.md
-│   │   └── rewrite-progress.md
-│   ├── plan
-│   │   └── README.md
-│   └── README.md
-├── powershell
-│   ├── Enter-GhqRepository.ps1
-│   ├── Enter-ParentDirectory.ps1
-│   ├── Invoke-ChezmoiApply.ps1
-│   ├── Invoke-ChezmoiCd.ps1
-│   ├── Invoke-EzaLa.ps1
-│   ├── Invoke-EzaTree.ps1
-│   ├── Invoke-GenerateEditorConfig.ps1
-│   ├── Invoke-PueueClean.ps1
-│   ├── Invoke-PueueCleanSuccessfulOnly.ps1
-│   ├── Invoke-PueueFollow.ps1
-│   ├── Invoke-PueueLog.ps1
-│   ├── Invoke-RebootSecondMonitor.ps1
-│   ├── Invoke-RunAfterChezmoiApply.ps1
-│   └── Invoke-RunBeforeChezmoiApply.ps1
-├── scripts
-│   └── pssa.ps1
-├── src
-│   ├── chezmoi
-│   │   ├── post-apply-hook.sh
-│   │   └── pre-apply-hook.sh
-│   ├── generate
-│   │   ├── archlinux-package-list.sh
-│   │   ├── pip-package-list.sh
-│   │   ├── pipx-package-list.sh
-│   │   ├── pnpm-package-list.sh
-│   │   └── uv-tool-list.sh
-│   ├── install
-│   │   ├── arch-packages.sh
-│   │   ├── gh-extensions.sh
-│   │   ├── pip-packages.sh
-│   │   ├── pipx-packages.sh
-│   │   ├── pnpm-package.sh
-│   │   └── uv-tools.sh
-│   ├── misc
-│   │   ├── cpat.sh
-│   │   ├── editorconfig.sh
-│   │   ├── numeronym.sh
-│   │   ├── pcd.sh
-│   │   ├── re-boot.sh
-│   │   ├── read-confirm.sh
-│   │   └── shut-down.sh
-│   └── update
-│       ├── apt-packages.sh
-│       ├── arch-packages.sh
-│       ├── brew.sh
-│       ├── chromedriver.sh
-│       ├── docker-compose.sh
-│       ├── fish-completions.sh
-│       ├── geckodriver.sh
-│       ├── mise.sh
-│       ├── pip-packages.sh
-│       ├── pnpm-packages.sh
-│       ├── twitch-cli.sh
-│       └── various.sh
-├── lefthook.yml
-├── LICENSE.txt
-├── Makefile
-├── maskfile.md
-├── package.json
-├── PSScriptAnalyzerSettings.psd1
-├── README.md
-└── renovate.json5
-```
+## 移さずに捨てたもの
 
+削除前に1ファイルずつ行き先を確認し、対応物が無かった3本は本人の判断で捨てた。
+**必要になったらこのリポジトリの git 履歴から拾える。**
+
+- `powershell/Invoke-RunBeforeChezmoiApply.ps1` — `Write-Output` と TODO だけのスタブ。
+  Linux 側の pre-apply hook も同じくスタブ
+- `powershell/Invoke-RunAfterChezmoiApply.ps1` — Windows の post-apply hook。
+  PowerShell プロファイルを Documents へコピーし、`%LOCALAPPDATA%\nvim` と `vimfiles` を
+  chezmoi のソースから作り直す。`.chezmoi.toml.tmpl` で**コメントアウトされたまま**で、
+  `NOTE: Neovim setting is broken` と註記されていた
+- `powershell/Invoke-RebootSecondMonitor.ps1` — BenQ EX3210U をデバイスの無効化と
+  有効化で再起動する。プロファイルに無いので `rsm` は元から使えず、
+  モニターの型番とデバイス ID がハードコードされている
+
+## 経緯
+
+deno-dax で書き始め、実行速度のため bun に変えた。その後、同じ処理が
+bash / PowerShell / chezmoi の3箇所に散っている状態を `mimikun.scripts` へ1本化した。
+このリポジトリの `src/**` と `powershell/**` は 2026-02 以降どこからも読み込まれておらず、
+chezmoi 側と乖離した死んだコピーだった。
